@@ -1,0 +1,22 @@
+# - name: 각 데이터 센터 시간 동기화
+#   hosts: all
+#   post_tasks:
+#   - name: Asia/Seoul 시간 설정
+#     timezone:
+#       name: Asia/Seoul 
+#둘다 사용가능.(둘다 같은걸 의미하며 밑에 내용은 이전 내용을 사용하기 위해서 셋팅헀다.)
+
+- name: 각 데이터 센터 시간 동기화
+  hosts: all
+  post_tasks:
+  - name: Asia/Seoul 시간 설정
+    timezone:
+      name: "{{ host_timezone }}"
+    vars: 
+    - host_timezone: "Asia/Seoul" 
+    notify: restart_chronyd
+  handlers:
+    - name: restart_chronyd
+      service:
+        name: chronyd
+        state: restarted

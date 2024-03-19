@@ -1,0 +1,21 @@
+---
+#(1) 방화벽 서버스OFF - http, httpd, mysql => firewalld
+#(2) 서비스 disable -httpd. mariadb =>service
+#(3) 서비스 디렉토리 삭제 - /var/www/html =>file
+#(4) 패키지 삭제- ......=> yum
+
+- name: "복구 시작"
+  hosts: all
+  tasks: 
+#(1) 방화벽 서버스OFF - http, httpd, mysql => firewalld
+    - name: (1) 방화벽 서버스OFF - http, httpd, mysql => firewalld
+     firewalld:
+      service: "{{ item }}"
+      permanent: yes
+      
+
+
+
+#(2) 서비스 disable -httpd. mariadb =>service
+#(3) 서비스 디렉토리 삭제 - /var/www/html =>file
+#(4) 패키지 삭제- ......=> yum

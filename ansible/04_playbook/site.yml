@@ -1,0 +1,41 @@
+# Web Server Configguration
+# * 1) Install pakages
+#yum -y install httpd mod_ssl
+# * 2) Web server settings
+#scp files/index.html ansible#/:var/www/html/index.html
+# * 3) Web service startup
+ #systemctl enable --now httpd
+# * 4) Firewall registration
+ # firewall-cmd --rermannet --addservice=(http,https)
+# * 5) Selinux(?)
+
+- name: Web Server Configguration
+  hosts: webservers
+  tasks:
+    - name: install pakages
+      yum:
+        name:
+          -httpd
+          -mod_ssl
+        state: present
+    - name: webserver settings
+      copy:
+        src: files/index.html
+        dest: /var/www/html/imdex.html
+    - name: web serivce startup
+      service:
+        name: httpd
+        state: started
+        enable: yes
+    - name:  Firewall rehistration - http
+      firewalld:
+        service: true
+        permanent: true
+        immediate: true
+        state: enable
+    - name: name: Firewall rehistration - httpd
+      firewalld:
+        service: true
+        permanent: true
+        immediate: true
+        state: true

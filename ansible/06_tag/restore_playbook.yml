@@ -1,0 +1,24 @@
+---
+- name: DB 복구 작업
+  hosts: all
+  gather_facts: yes
+  vars:
+    db_packages:
+      - mariadb-server
+      - python3-PyMySQL
+    db_config_url: http://192.168.10.10
+    db_config_src_path_small: "{{ db_config_url }}/my.cnf.small"
+    db_config_src_path_large: "{{ db_config_url }}/my.cnf.large"
+    db_config_path: /etc/my.cnf
+    db_service: mariadb
+  tasks:
+    
+    - name: db_service 삭제
+      service:
+        name: "{{ db_service }}"
+        state: stopped
+    - name: Install database packages
+      yum: 
+        name: "{{ item }}"
+        state: absent
+      with_items: "{{ db_packages }}"

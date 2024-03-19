@@ -1,0 +1,6 @@
+---
+- name: Apache role test
+  hosts: webservers
+  roles:
+  - apache
+  

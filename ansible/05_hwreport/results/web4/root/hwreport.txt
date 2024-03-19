@@ -1,0 +1,4 @@
+INVENTORY_HOSTNAME = absible4
+TOTAL_MEM = 1743
+BIOS_VER = {'string': '2.14.14', 'full': '2.14.14', 'major': 2, 'minor': 14, 'revision': 14}
+SDA_SIZE = 60.00 GB

@@ -1,0 +1,15 @@
+---
+- name: "복구시작"
+  hosts: all
+  tasks:
+    - name: 웹 패키지 삭제 
+      yum:
+        name: "{{ packages }}"
+        state: absent
+      vars:
+        packages:
+            - httpd
+            - php
+            - mariadb-server
+            - mutt   
+  

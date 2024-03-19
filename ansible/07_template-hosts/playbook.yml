@@ -1,0 +1,9 @@
+--- 
+- name:
+  hosts: all
+  gather_facts: yes
+  tasks:
+  - name: 탬플릿 사용한 /etc/hosts 파일 배포
+    template:
+      src: templates/hosts.j2
+      dest: /etc/hostsdo
